@@ -35,7 +35,11 @@ export function TopicDetail({ topic }: TopicDetailProps) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
+<<<<<<< HEAD
       className="bg-surface-container-lowest ghost-border rounded-3xl p-8 lg:p-12 shadow-sm min-h-[80vh] flex flex-col"
+=======
+      className="bg-surface-container-lowest ghost-border rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-12 shadow-sm min-h-[80vh] flex flex-col min-w-0 w-full overflow-hidden"
+>>>>>>> 93d8286 (V3)
     >
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-4">
@@ -68,6 +72,7 @@ export function TopicDetail({ topic }: TopicDetailProps) {
         </button>
       </div>
 
+<<<<<<< HEAD
       <div className="flex-1">
         {activeTab === 'theory' ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -75,13 +80,26 @@ export function TopicDetail({ topic }: TopicDetailProps) {
           </motion.div>
         ) : (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
+=======
+      <div className="flex-1 min-w-0 w-full">
+        {activeTab === 'theory' ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-x-auto no-scrollbar w-full">
+            {topic.theory}
+          </motion.div>
+        ) : (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8 min-w-0 w-full">
+>>>>>>> 93d8286 (V3)
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-semibold">Problem Set ({topic.problems.length})</h2>
             </div>
 
             <div className="grid gap-6">
               {topic.problems.map((problem, idx) => (
+<<<<<<< HEAD
                 <div key={problem.id} className="bg-surface-container-low/30 p-8 rounded-2xl ghost-border hover:bg-surface-container-low/60 transition-colors">
+=======
+                <div key={problem.id} className="bg-surface-container-low/30 p-4 sm:p-6 lg:p-8 rounded-2xl ghost-border hover:bg-surface-container-low/60 transition-colors overflow-hidden">
+>>>>>>> 93d8286 (V3)
                   <div className="flex justify-between items-start mb-6">
                     <span className="text-sm font-bold text-secondary uppercase tracking-wider">Problem {idx + 1}</span>
                     <span className={cn(
@@ -94,8 +112,13 @@ export function TopicDetail({ topic }: TopicDetailProps) {
                     </span>
                   </div>
                   
+<<<<<<< HEAD
                   <div className="mb-6 text-on-surface">
                     <MathText block math={problem.statement} />
+=======
+                  <div className="mb-6 text-on-surface min-w-0 w-full">
+                    <MathText block math={problem.statement} className="text-[13px] md:text-base" />
+>>>>>>> 93d8286 (V3)
                   </div>
 
                   {problem.type === 'multiple-choice' && problem.options && (
@@ -105,7 +128,11 @@ export function TopicDetail({ topic }: TopicDetailProps) {
                         const isChecked = checkedAnswers[problem.id];
                         const isCorrect = problem.correctAnswerIndex === optIdx;
                         
+<<<<<<< HEAD
                         let btnClass = "w-full text-left p-4 rounded-xl ghost-border transition-all flex items-center gap-4 ";
+=======
+                        let btnClass = "w-full text-left p-3 sm:p-4 rounded-xl ghost-border transition-all flex items-center gap-3 sm:gap-4 overflow-hidden min-w-0 ";
+>>>>>>> 93d8286 (V3)
                         if (isChecked) {
                           if (isCorrect) btnClass += "bg-green-500/10 border-green-500/30 text-green-700 dark:text-green-400";
                           else if (isSelected) btnClass += "bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-400";
@@ -123,14 +150,24 @@ export function TopicDetail({ topic }: TopicDetailProps) {
                             className={btnClass}
                           >
                             <div className={cn(
+<<<<<<< HEAD
                               "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold",
+=======
+                              "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0",
+>>>>>>> 93d8286 (V3)
                               isChecked && isCorrect ? "border-green-500 bg-green-500 text-white" :
                               isChecked && isSelected ? "border-red-500 bg-red-500 text-white" :
                               isSelected ? "border-primary bg-primary text-white" : "border-outline-variant"
                             )}>
                               {String.fromCharCode(65 + optIdx)}
                             </div>
+<<<<<<< HEAD
                             <MathText math={opt} className="inline" />
+=======
+                            <div className="min-w-0 flex-1 overflow-x-auto py-1">
+                              <MathText math={opt} className="inline text-[13px] md:text-base" />
+                            </div>
+>>>>>>> 93d8286 (V3)
                           </button>
                         );
                       })}
@@ -173,11 +210,19 @@ export function TopicDetail({ topic }: TopicDetailProps) {
                         </div>
                       )}
                       <h4 className="text-sm font-bold uppercase tracking-widest text-secondary mb-4">Step-by-Step Solution</h4>
+<<<<<<< HEAD
                       <MathText block math={problem.solution} />
                       {problem.finalAnswer && (
                         <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
                           <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Final Answer</h4>
                           <MathText block math={problem.finalAnswer} />
+=======
+                      <MathText block math={problem.solution} className="text-[13px] md:text-base" />
+                      {problem.finalAnswer && (
+                        <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
+                          <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Final Answer</h4>
+                          <MathText block math={problem.finalAnswer} className="text-[13px] md:text-base" />
+>>>>>>> 93d8286 (V3)
                         </div>
                       )}
                     </motion.div>

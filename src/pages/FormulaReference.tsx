@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { MathText } from '../components/MathText';
 import { formulas } from '../data/calculusData';
+<<<<<<< HEAD
+=======
+import { MagicHexagon } from '../components/MagicHexagon';
+>>>>>>> 93d8286 (V3)
 
 export function FormulaReference() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,6 +45,15 @@ export function FormulaReference() {
           </div>
         </div>
 
+<<<<<<< HEAD
+=======
+        {!searchQuery && (
+          <div className="mb-16">
+            <MagicHexagon />
+          </div>
+        )}
+
+>>>>>>> 93d8286 (V3)
         {Object.entries(groupedFormulas).map(([category, catFormulas]) => (
           <div key={category} className="mb-12">
             <h2 className="text-2xl font-bold mb-6 text-primary border-b border-outline-variant/20 pb-2">{category}</h2>

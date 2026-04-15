@@ -27,10 +27,17 @@ export function Topics() {
   const [topics] = useState<TopicData[]>(initialTopics);
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen pt-24 pb-20 px-6 max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-8">
       <Sidebar topics={topics} />
       
       <main className="flex-1 min-w-0">
+=======
+    <div className="min-h-screen pt-24 pb-20 px-3 md:px-6 max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-4 lg:gap-8 overflow-x-hidden">
+      <Sidebar topics={topics} />
+      
+      <main className="flex-1 min-w-0 w-full">
+>>>>>>> 93d8286 (V3)
         <Routes>
           <Route path="/" element={<Navigate to={topics[0]?.id || ''} replace />} />
           <Route path=":topicId" element={<TopicRouter topics={topics} />} />
