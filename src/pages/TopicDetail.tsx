@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { MathText } from '../components/MathText';
-import { TopicData, Problem } from '../data/calculusData';
+import { TopicData } from '../data/calculusData';
 import { cn } from '../lib/utils';
 
 interface TopicDetailProps {
   topic: TopicData;
-  onAddProblem: (topicId: string, problem: Problem) => void;
 }
 
-export function TopicDetail({ topic, onAddProblem }: TopicDetailProps) {
+export function TopicDetail({ topic }: TopicDetailProps) {
   const [activeTab, setActiveTab] = useState<'theory' | 'problems'>('theory');
   const [showSolution, setShowSolution] = useState<Record<string, boolean>>({});
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [checkedAnswers, setCheckedAnswers] = useState<Record<string, boolean>>({});
-  
-  // State for Add Problem Modal
-  const [isAddingProblem, setIsAddingProblem] = useState(false);
-  const [newProblem, setNewProblem] = useState({ statement: '', solution: '', difficulty: 'Medium' as const });
 
   const toggleSolution = (id: string) => {
     setShowSolution(prev => ({ ...prev, [id]: !prev[id] }));
@@ -32,19 +27,6 @@ export function TopicDetail({ topic, onAddProblem }: TopicDetailProps) {
     if (correctIndex === undefined) return;
     setCheckedAnswers(prev => ({ ...prev, [problemId]: true }));
     setShowSolution(prev => ({ ...prev, [problemId]: true }));
-  };
-
-  const handleSaveProblem = () => {
-    if (!newProblem.statement || !newProblem.solution) return;
-    onAddProblem(topic.id, {
-      id: Math.random().toString(36).substr(2, 9),
-      difficulty: newProblem.difficulty,
-      statement: newProblem.statement,
-      solution: newProblem.solution,
-      type: 'free-response'
-    });
-    setIsAddingProblem(false);
-    setNewProblem({ statement: '', solution: '', difficulty: 'Medium' });
   };
 
   return (
@@ -95,58 +77,7 @@ export function TopicDetail({ topic, onAddProblem }: TopicDetailProps) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-semibold">Problem Set ({topic.problems.length})</h2>
-              <div className="flex gap-3">
-                <button 
-                  onClick={() => setIsAddingProblem(true)}
-                  className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-container transition-colors flex items-center gap-2"
-                >
-                  <span className="material-symbols-outlined text-sm">upload</span>
-                  Upload Problem
-                </button>
-              </div>
             </div>
-
-            {isAddingProblem && (
-              <div className="bg-surface-container-low/50 p-6 rounded-2xl ghost-border mb-8">
-                <h3 className="text-lg font-bold mb-4">Add New Problem</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-secondary mb-2">Difficulty</label>
-                    <select 
-                      value={newProblem.difficulty} 
-                      onChange={e => setNewProblem({...newProblem, difficulty: e.target.value as any})}
-                      className="w-full bg-surface-container-lowest p-2 rounded-lg ghost-border"
-                    >
-                      <option>Easy</option>
-                      <option>Medium</option>
-                      <option>Hard</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-secondary mb-2">Problem Statement (LaTeX)</label>
-                    <textarea 
-                      value={newProblem.statement}
-                      onChange={e => setNewProblem({...newProblem, statement: e.target.value})}
-                      className="w-full h-24 bg-surface-container-lowest p-4 rounded-lg ghost-border font-mono text-sm resize-none"
-                      placeholder="e.g., \int x^2 dx"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-secondary mb-2">Solution (LaTeX)</label>
-                    <textarea 
-                      value={newProblem.solution}
-                      onChange={e => setNewProblem({...newProblem, solution: e.target.value})}
-                      className="w-full h-24 bg-surface-container-lowest p-4 rounded-lg ghost-border font-mono text-sm resize-none"
-                      placeholder="e.g., \frac{x^3}{3} + C"
-                    />
-                  </div>
-                  <div className="flex gap-3 justify-end mt-4">
-                    <button onClick={() => setIsAddingProblem(false)} className="px-4 py-2 text-secondary hover:bg-surface-container-high rounded-lg text-sm font-medium">Cancel</button>
-                    <button onClick={handleSaveProblem} className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium">Save Problem</button>
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="grid gap-6">
               {topic.problems.map((problem, idx) => (
