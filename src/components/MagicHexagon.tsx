@@ -4,7 +4,6 @@ import { MathText } from './MathText';
 import { cn } from '../lib/utils';
 
 type Mode = 'trig' | 'hyperbolic';
-
 interface NodeData {
   id: string;
   trig: string;
