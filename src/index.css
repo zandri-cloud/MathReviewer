@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Newsreader", serif;
+}
+
+@layer base {
+  :root {
+    --primary: #004ac6;
+    --primary-container: #2563eb;
+    --surface: #f7f9fb;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f2f4f6;
+    --surface-container-high: #e6e8ea;
+    --on-surface: #191c1e;
+    --on-surface-variant: #434655;
+    --outline: #737686;
+    --outline-variant: #c3c6d7;
+    --secondary: #515f74;
+    --tertiary: #4338d9;
+  }
+
+  .dark {
+    --primary: #aac7ff;
+    --primary-container: #003696;
+    --surface: #111318;
+    --surface-container-lowest: #000000;
+    --surface-container-low: #191c20;
+    --surface-container-high: #282a2f;
+    --on-surface: #e2e2e9;
+    --on-surface-variant: #c4c6d0;
+    --outline: #8e9099;
+    --outline-variant: #44474e;
+    --secondary: #bec6dc;
+    --tertiary: #c2c1ff;
+  }
+
+  body {
+    @apply bg-surface text-on-surface font-sans antialiased selection:bg-primary/10 selection:text-primary transition-colors duration-500;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: color-mix(in srgb, var(--surface-container-lowest) 70%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .ghost-border {
+    border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
